@@ -11,4 +11,6 @@
     <string name="title_activity_register">Register</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_venues">venues</string>
+    <string name="title_activity_google_map">GoogleMap</string>
+    <string name="title_activity_map_venue">MapVenue</string>
 </resources>
