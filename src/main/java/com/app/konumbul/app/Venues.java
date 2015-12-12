@@ -1,9 +1,14 @@
 package com.app.konumbul.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,10 +25,36 @@ import java.util.List;
 public class Venues extends Activity {
 
     List<Venue> venues = new ArrayList<Venue>();
+    LocationManager lm;
+    boolean network_enabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if(!network_enabled){
+            //Toast.makeText(getApplicationContext(), "olmadi", Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(Venues.this)
+                    .setTitle(R.string.no_location)
+                    .setMessage(R.string.select_proc)
+                    .setPositiveButton(R.string.open_location_settings, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent viewIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(viewIntent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .show();
+            return;
+        }
 
         SharedPreferences prefs = getSharedPreferences("registiration", MODE_PRIVATE);
         if(prefs.getString("token", "").equals("")){

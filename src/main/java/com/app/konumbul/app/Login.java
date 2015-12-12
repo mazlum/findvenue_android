@@ -166,7 +166,7 @@ public class Login extends Activity{
                             startActivity(loginIntent);
                             finish();
                         }
-                    }, 5000);
+                    }, 2000);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

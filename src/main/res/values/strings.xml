@@ -13,4 +13,13 @@
     <string name="title_activity_venues">venues</string>
     <string name="title_activity_google_map">GoogleMap</string>
     <string name="title_activity_map_venue">MapVenue</string>
+    <string name="gps_network_not_enabled">Konum açık değil</string>
+    <string name="open_location_settings">Konum Ayarları</string>
+    <string name="cancel">Çıkış</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="no_location">Konum Bulunamadı</string>
+    <string name="select_proc">Konumunuzu tespit edemedik. Lütfen bir işlem yapın.</string>
+    <string name="no_result">Sonuç Bulunamadı</string>
+    <string name="no_result_desc">Herhangi bir mekan bulunamadi. Başka bir arama yapmak ister misiniz?</string>
 </resources>

@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
@@ -99,31 +103,46 @@ public class MapVenue extends Activity implements
         @Override
         protected void onPostExecute(ArrayList<Place> result) {
             super.onPostExecute(result);
-            Log.i("test", "test");
             if (dialog.isShowing()) {
-                Log.i("showing", "showing");
                 dialog.dismiss();
             }
-            for (int i = 0; i < result.size(); i++) {
-                mMap.addMarker(new MarkerOptions()
-                        .title(result.get(i).getName())
-                        .position(
-                                new LatLng(result.get(i).getLatitude(), result
-                                        .get(i).getLongitude()))
-                        .icon(BitmapDescriptorFactory
-                                .fromResource(R.drawable.pin))
-                        .snippet(result.get(i).getVicinity()));
-            }
+            if(result.size() > 0){
+                for (int i = 0; i < result.size(); i++) {
+                    mMap.addMarker(new MarkerOptions()
+                            .title(result.get(i).getName())
+                            .position(
+                                    new LatLng(result.get(i).getLatitude(), result
+                                            .get(i).getLongitude()))
+                            .icon(BitmapDescriptorFactory
+                                    .fromResource(R.drawable.pin))
+                            .snippet(result.get(i).getVicinity()));
+                }
 
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(result.get(0).getLatitude(), result
-                            .get(0).getLongitude())) // Sets the center of the map to
-                            // Mountain View
-                    .zoom(14) // Sets the zoom
-                    .tilt(30) // Sets the tilt of the camera to 30 degrees
-                    .build(); // Creates a CameraPosition from the builder
-            mMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(result.get(0).getLatitude(), result
+                                .get(0).getLongitude())) // Sets the center of the map to
+                                // Mountain View
+                        .zoom(14) // Sets the zoom
+                        .tilt(30) // Sets the tilt of the camera to 30 degrees
+                        .build(); // Creates a CameraPosition from the builder
+                mMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(cameraPosition));
+            }else{
+                new AlertDialog.Builder(MapVenue.this)
+                        .setTitle(R.string.no_result)
+                        .setMessage(R.string.no_result_desc)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                            }
+                        })
+                        .show();
+            }
         }
 
         @Override
