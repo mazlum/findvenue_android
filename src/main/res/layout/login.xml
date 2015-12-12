@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:background="#fffffaf0">
 
     <LinearLayout
             android:orientation="vertical"
@@ -11,40 +11,35 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_height="wrap_content" android:id="@+id/linearLayout">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Kullanıcı Adı"
-                android:id="@+id/txtUsername" android:layout_gravity="center_horizontal"/>
+
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="massumo"
+                android:hint="Kullanıcı Adı"
                 android:id="@+id/editTextUsername" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtUserNameErrors" android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Şifre"
-                android:id="@+id/txtPassword" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtUserNameErrors" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
+
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:text="123123"
-                android:ems="10"
+                android:hint="Şifre"
                 android:id="@+id/editTextPassword" android:layout_gravity="center_horizontal"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtPasswordErrors" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtPasswordErrors" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
+
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +52,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/register"
                 android:paddingTop="10sp"
-                android:id="@+id/registerTextView" android:layout_below="@+id/linearLayout" android:layout_centerHorizontal="true"/>
+                android:id="@+id/registerTextView" android:layout_below="@+id/linearLayout"
+                android:layout_centerHorizontal="true" android:clickable="true"/>
 
     </LinearLayout>
 </ScrollView>

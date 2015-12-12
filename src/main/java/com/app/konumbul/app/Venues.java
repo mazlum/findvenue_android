@@ -32,6 +32,7 @@ public class Venues extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
@@ -55,13 +56,14 @@ public class Venues extends Activity {
                     .show();
             return;
         }
+        */
 
         SharedPreferences prefs = getSharedPreferences("registiration", MODE_PRIVATE);
-        if(prefs.getString("token", "").equals("")){
+        //if(prefs.getString("token", "").equals("")){
             Intent loginIntent = new Intent(this, Login.class);
             loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(loginIntent);
-        }
+        //}
 
         setContentView(R.layout.activity_venues);
 
