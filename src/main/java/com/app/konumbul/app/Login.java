@@ -43,7 +43,7 @@ public class Login extends Activity{
             @Override
             public void onClick(View v) {
                 ((TextView)findViewById(R.id.txtUserNameErrors)).setText("");
-                ((TextView)findViewById(R.id.txtPasswordErrros)).setText("");
+                ((TextView)findViewById(R.id.txtPasswordErrors)).setText("");
                 String username, password;
                 username = editTextUserName.getText().toString();
                 password = editTextPassword.getText().toString();

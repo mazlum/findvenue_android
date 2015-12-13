@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">KonumBul</string>
-
+    <string name="login">Giriş Yap</string>
     <string name="action_settings">Ayarlar</string>
-    <string name="register">Kayıt Ol</string>
+    <string name="register">Bir Hesap Oluşturun</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="mail">E mail</string>
     <string name="password">Şifre</string>
     <string name="password_again">Şifre Tekrar</string>
     <string name="name">İsim</string>
     <string name="title_activity_register">Register</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_venues">venues</string>
     <string name="title_activity_google_map">GoogleMap</string>
     <string name="title_activity_map_venue">MapVenue</string>
@@ -22,4 +21,21 @@
     <string name="select_proc">Konumunuzu tespit edemedik. Lütfen bir işlem yapın.</string>
     <string name="no_result">Sonuç Bulunamadı</string>
     <string name="no_result_desc">Herhangi bir mekan bulunamadi. Başka bir arama yapmak ister misiniz?</string>
+
+
+    <color name="background_color">#00a1dd</color>
+    <color name="white">#ffffff</color>
+    <style name="DefaultButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#979797</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:shadowColor">#f9f9f9</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
 </resources>
