@@ -192,8 +192,7 @@ public class MapVenue extends Activity implements
 
         @Override
         protected ArrayList<Place> doInBackground(Void... arg0) {
-            PlacesService service = new PlacesService(
-                    "AIzaSyAloymCndijBTQALuIGG8s_Iptnm2g_K0k");
+            PlacesService service = new PlacesService(Global.googlePlacesApi);
             ArrayList<Place> findPlaces = service.findPlaces(loc.getLatitude(), // 28.632808
                     loc.getLongitude(), places); // 77.218276
 
