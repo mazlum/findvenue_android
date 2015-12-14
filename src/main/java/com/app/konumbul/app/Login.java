@@ -1,6 +1,7 @@
 package com.app.konumbul.app;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,10 +28,11 @@ public class Login extends Activity{
     EditText editTextUserName, editTextPassword;
     TextView registerText;
     Button btnLogin;
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         ((TextView)findViewById(R.id.txtUserNameErrors)).setText("");
         ((TextView)findViewById(R.id.txtPasswordErrors)).setText("");
         btnLogin = (Button)findViewById(R.id.btnSignin);
@@ -42,6 +44,10 @@ public class Login extends Activity{
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog = new ProgressDialog(Login.this);
+                dialog.setMessage("Giriş Yapılıyor..");
+                dialog.show();
+
                 ((TextView)findViewById(R.id.txtUserNameErrors)).setText("");
                 ((TextView)findViewById(R.id.txtPasswordErrors)).setText("");
                 String username, password;
@@ -65,7 +71,9 @@ public class Login extends Activity{
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Login.this, Register.class);
+                registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(registerIntent);
+                finish();
             }
         });
     }
@@ -116,8 +124,7 @@ public class Login extends Activity{
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("konumBul", result);
-
+            dialog.dismiss();
             try {
                 JSONObject resultObject = new JSONObject(result);
                 if(resultObject.getString("status").equals("0")) {
@@ -151,6 +158,7 @@ public class Login extends Activity{
                         }
                     }
                 }else{
+
                     Toast.makeText(getApplicationContext(),
                             "Başarı ile giriş yaptınız. Ana sayfaya yönlendiriliyorsunuz.", Toast.LENGTH_LONG).show();
 

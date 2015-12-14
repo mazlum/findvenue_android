@@ -43,10 +43,39 @@ public class MapVenue extends Activity implements
     private String selectedPlace;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog dialog;
+    boolean network_enabled;
+    LocationManager lm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_venue);
+
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if(!network_enabled){
+            //Toast.makeText(getApplicationContext(), "olmadi", Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(MapVenue.this)
+                    .setTitle(R.string.no_location)
+                    .setMessage(R.string.select_proc)
+                    .setPositiveButton(R.string.open_location_settings, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent viewIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(viewIntent);
+                            //finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        }
+
         selectedPlace = getIntent().getExtras().getString("place");
 
         initCompo();
@@ -81,7 +110,12 @@ public class MapVenue extends Activity implements
     }
 
     protected void onStart() {
-        mGoogleApiClient.connect();
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if(network_enabled) {
+            mGoogleApiClient.connect();
+        }
         super.onStart();
     }
 
@@ -153,7 +187,6 @@ public class MapVenue extends Activity implements
             super.onPreExecute();
             dialog = new ProgressDialog(MapVenue.this);
             dialog.setMessage("Yükleniyor..");
-            Log.i("onPru", "onPure");
             dialog.show();
         }
 

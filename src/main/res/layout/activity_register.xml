@@ -2,101 +2,107 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:weightSum="1">
+              android:layout_height="match_parent"
+              android:background="@color/background_color">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
+            android:padding="10dp"
             android:layout_height="wrap_content" android:id="@+id/linearLayout">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/name"
-                android:id="@+id/txtName" android:layout_gravity="center_horizontal"/>
+
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:hint="  İsim"
+                android:background="@drawable/edittext_top_bg"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/username"
                 android:id="@+id/editTextName" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtNameErrors" android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/mail"
-                android:id="@+id/txtMail" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtNameErrors" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:background="@drawable/edittext_default_bg"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/email"
+                android:hint="   Email adresiniz"
                 android:id="@+id/editTextMail" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtMailErrors" android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/username"
-                android:id="@+id/txtUserName" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtMailErrors" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:background="@drawable/edittext_default_bg"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/username"
+                android:hint="   Kullanıcı Adınız"
                 android:id="@+id/editTextUsername" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtUserNameErrors" android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/password"
-                android:id="@+id/txtPassword" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtUserNameErrors" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:background="@drawable/edittext_default_bg"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/password"
+                android:hint="   Şifreniz"
                 android:inputType="textPassword"
                 android:id="@+id/editTextPassword" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtPasswordErrros" android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/password_again"
-                android:id="@+id/txtPasswordAgain" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtPasswordErrros" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:ems="10"
+                android:background="@drawable/edittext_bottom_bg"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/password"
+                android:hint="   Şifreniz Tekrar"
                 android:id="@+id/editTextPasswordAgain" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txtPasswordAgainErros" android:layout_gravity="center_horizontal"/>
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtPasswordAgainErros" android:layout_gravity="center_horizontal|left"
+                android:clickable="false" android:textColor="#ffff192d" android:textSize="14dp"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:id="@+id/btnRegister" android:layout_gravity="center_horizontal"/>
+                android:padding="10dp"
+                style="@style/DefaultButtonText"
+                android:text="@string/registerComplete"
+                android:id="@+id/btnRegister"
+                android:background="@drawable/button_default_bg" />
+
+        <TextView android:id="@+id/loginTextView"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:textColor="@color/white"
+                  android:textSize="14sp"
+                  android:text="@string/login"
+                  android:gravity="center"/>
     </LinearLayout>
 
 

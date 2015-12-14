@@ -2,7 +2,8 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.app.konumbul.app.Venues">
+                tools:context="com.app.konumbul.app.Venues"
+                android:background="@color/background_color" >
 
     <ListView
             android:layout_width="match_parent"

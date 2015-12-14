@@ -41,7 +41,7 @@ public class VenueAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View satirView;
 
-        satirView = mInflater.inflate(R.layout.venue_layout, null);
+        satirView = mInflater.inflate(R.layout.activity_venue, null);
 
         TextView textView =
                 (TextView) satirView.findViewById(R.id.listImageText);

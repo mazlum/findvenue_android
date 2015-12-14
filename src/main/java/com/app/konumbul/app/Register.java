@@ -1,6 +1,7 @@
 package com.app.konumbul.app;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -28,6 +29,8 @@ public class Register extends Activity{
     EditText editTextName, editTextUserName, editTextUserPassword, editTextUserMail, editTextUserPasswordAgain;
     Button registerButton;
     String name, username, password, passwordAgain, mail;
+    TextView loginTextView;
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +40,24 @@ public class Register extends Activity{
         editTextUserPassword = (EditText)findViewById(R.id.editTextPassword);
         editTextUserMail = (EditText)findViewById(R.id.editTextMail);
         editTextUserPasswordAgain = (EditText)findViewById(R.id.editTextPasswordAgain);
-
+        loginTextView = (TextView) findViewById(R.id.loginTextView);
         registerButton = (Button)findViewById(R.id.btnRegister);
+
+        loginTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(Register.this, Login.class);
+                startActivity(loginIntent);
+                finish();
+            }
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog = new ProgressDialog(Register.this);
+                dialog.setMessage("Kayıt Olunuyor..");
+                dialog.show();
                 ((TextView)findViewById(R.id.txtUserNameErrors)).setText("");
                 ((TextView)findViewById(R.id.txtPasswordErrros)).setText("");
                 ((TextView)findViewById(R.id.txtPasswordAgainErros)).setText("");
@@ -139,8 +154,7 @@ public class Register extends Activity{
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("konumBul", result);
-
+            dialog.dismiss();
             try {
                 JSONObject resultObject = new JSONObject(result);
                 if(resultObject.getString("status").equals("0")) {

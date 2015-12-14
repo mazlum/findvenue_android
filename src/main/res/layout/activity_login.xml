@@ -19,6 +19,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_top_bg"
                     android:padding="10dp"
+                    android:paddingLeft="100dp"
                     android:hint="  Kullanıcı Adı"
                     android:textColorHint="#aaaaaa"
                     android:drawableLeft="@drawable/username"

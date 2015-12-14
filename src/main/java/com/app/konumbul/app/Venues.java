@@ -7,18 +7,29 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -32,7 +43,7 @@ public class Venues extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
+
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
@@ -56,14 +67,24 @@ public class Venues extends Activity {
                     .show();
             return;
         }
-        */
+
 
         SharedPreferences prefs = getSharedPreferences("registiration", MODE_PRIVATE);
-        //if(prefs.getString("token", "").equals("")){
+        String token = prefs.getString("token", "");
+        if(token.equals("")){
             Intent loginIntent = new Intent(this, Login.class);
             loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(loginIntent);
-        //}
+        }else{
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("key", token);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            PostData postData = new PostData(jsonObject, getApplicationContext());
+            postData.execute();
+        }
 
         setContentView(R.layout.activity_venues);
 
@@ -72,6 +93,17 @@ public class Venues extends Activity {
         venues.add(new Venue("Banka", "bank"));
         venues.add(new Venue("Cami", "mosque"));
         venues.add(new Venue("Kafe", "cafe"));
+        venues.add(new Venue("Müze", "museum"));
+        venues.add(new Venue("Kütüphane", "library"));
+        venues.add(new Venue("Otobüs Durağı", "bus_station"));
+        venues.add(new Venue("Tiyatro", "movie_theater"));
+        venues.add(new Venue("Hayvanat Bahçesi", "zoo"));
+        venues.add(new Venue("Benzin İstasyonu", "gas_station"));
+        venues.add(new Venue("Sergi Salonu", "art_gallery"));
+        venues.add(new Venue("Üniversite", "university"));
+        venues.add(new Venue("Restöranlar", "restaurant"));
+        venues.add(new Venue("Okul", "school"));
+        venues.add(new Venue("Alışveriş Merkezi", "shopping_mall"));
 
         final ListView venueListView = (ListView) findViewById(R.id.listViewVenues);
         VenueAdapter adapter = new VenueAdapter(this, venues, getApplicationContext());
@@ -107,7 +139,71 @@ public class Venues extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+    private class PostData extends AsyncTask<String, String, String> {
+
+        HttpURLConnection urlConnection;
+
+        JSONObject jsonData;
+        Context context;
+        public PostData(JSONObject jsonData, Context context){
+            this.jsonData = jsonData;
+            this.context=context;
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            StringBuilder result = new StringBuilder();
+
+            try {
+                URL url = new URL(Global.webServerUrl + "/control/");
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write(jsonData.toString());
+                out.flush();
+
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+
+            }catch( Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                urlConnection.disconnect();
+            }
+
+
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONObject resultObject = new JSONObject(result);
+                if(resultObject.getString("status").equals("1")) {
+                    if(resultObject.getString("control").equals("0")) {
+                        final Intent loginIntent = new Intent(Venues.this, Login.class);
+                        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(loginIntent);
+                        finish();
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }
