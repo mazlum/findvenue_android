@@ -5,8 +5,19 @@
                 tools:context="com.app.konumbul.app.Venues"
                 android:background="@color/background_color" >
 
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            style="@style/DefaultButtonText"
+            android:text="@string/Logout"
+            android:id="@+id/btnLogout"
+            android:background="@drawable/button_default_bg" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
     <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listViewVenues" />
+            android:id="@+id/listViewVenues" android:layout_below="@+id/btnLogout"/>
 </RelativeLayout>

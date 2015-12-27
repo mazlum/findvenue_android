@@ -17,10 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,11 +35,10 @@ public class Venues extends Activity {
     List<Venue> venues = new ArrayList<Venue>();
     LocationManager lm;
     boolean network_enabled;
-
+    Button btnLogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -68,7 +64,6 @@ public class Venues extends Activity {
             return;
         }
 
-
         SharedPreferences prefs = getSharedPreferences("registiration", MODE_PRIVATE);
         String token = prefs.getString("token", "");
         if(token.equals("")){
@@ -88,6 +83,21 @@ public class Venues extends Activity {
 
         setContentView(R.layout.activity_venues);
 
+        btnLogout = (Button)findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedpreferences = getSharedPreferences("registiration", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("token", "");
+                editor.commit();
+
+                final Intent loginIntent = new Intent(Venues.this, Venues.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(loginIntent);
+                finish();
+            }
+        });
         venues.add(new Venue("Havaalanı", "airport"));
         venues.add(new Venue("Hastahane", "hospital"));
         venues.add(new Venue("Banka", "bank"));

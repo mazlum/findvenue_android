@@ -17,6 +17,7 @@
     <string name="open_location_settings">Konum Ayarları</string>
     <string name="cancel">Çıkış</string>
     <string name="yes">Evet</string>
+    <string name="Logout">Çıkış</string>
     <string name="no">Hayır</string>
     <string name="no_location">Konum Bulunamadı</string>
     <string name="select_proc">Konumunuzu tespit edemedik. Lütfen bir işlem yapın.</string>
